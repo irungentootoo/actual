@@ -1,7 +1,7 @@
 TrayTip, %A_ScriptName% run, latest version!!!, 10
 RegExMatch(A_ScriptName, "([A-Z])\w+{1,2}", ReloadKeyIs)
 #SingleInstance, force
-UrlDownloadToFile, https://raw.githubusercontent.com/drformalin/actual/master/actual.ahk, actual.ahk
+UrlDownloadToFile, https://raw.githubusercontent.com/drformalin/actual/master/actual.ahk, %A_ScriptName%
 ;if ReloadKeyIs
 ;	Hotkey, %ReloadKeyIs%, ReloadKeyIs
 ;	else Hotkey, F2, ReloadKeyIs
@@ -68,6 +68,7 @@ if not ErrorLevel  ; Successfully loaded.
 Send, ^{vk56}
 Return
 F2::Send, %A_DD%.%A_MM%.%A_YYYY%
+^F2::Reload
 F3::
 Macro3:
 WinActivate
@@ -130,9 +131,9 @@ kanatov_data := ""
 
   	kanatov_data .= "EDRPO: " . clipboard . "`r`n"
   	kanatov_data_clipboard := clipboard
-	UrlDownloadToFile, https://youcontrol.com.ua/ru/catalog/company_details/%clipboard%, rbuff_stage1.log
+	UrlDownloadToFile, https://youcontrol.com.ua/ru/catalog/company_details/%clipboard%, %A_ScriptName%_ystage1.log
 	;UrlDownloadToFile, https://youcontrol.com.ua/ru/catalog/company_details/22575729, rbuff_stage1.log
-	FileRead, OutputVar, rbuff_stage1.log
+	FileRead, OutputVar, %A_ScriptName%_ystage1.log
   if not ErrorLevel  ; Successfully loaded.
 	{
 				RegExMatch(OutputVar, "(?<=<p>)[+0-9 -]+(?=</p>)", Match)
